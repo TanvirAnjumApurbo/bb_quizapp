@@ -100,3 +100,11 @@ body {
 .container {
   margin-bottom: 50px; /* Add margin to the bottom of the container */
 }
+
+.bg-danger {
+  background-color: #dc3545 !important;
+}
+
+.fw-bold {
+  font-weight: bold !important;
+}

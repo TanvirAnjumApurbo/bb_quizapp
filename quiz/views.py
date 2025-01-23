@@ -5,6 +5,7 @@ from account.models import Profile
 from .models import Quiz, Category, QuizSubmission
 from django.db.models import Q
 from django.contrib import messages
+from django.http import JsonResponse
 
 # View to display all quizzes
 @login_required(login_url='login')
@@ -46,13 +47,19 @@ def quiz_view(request, quiz_id):
     
     if request.method == 'POST':
         score = int(request.POST.get('score', 0))
+        already_submitted = QuizSubmission.objects.filter(user=request.user, quiz=quiz).exists()
+
+        if already_submitted:
+            message = f"This time you got {score} out of {total_questions}"
+        else:
+            QuizSubmission.objects.create(user=request.user, quiz=quiz, score=score)
+            message = f"Quiz submitted successfully. Your score is {score} out of {total_questions}"
+
+        # If AJAX, return JSON instead of redirect
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({"message": message, "score": score})
         
-        if QuizSubmission.objects.filter(user=request.user, quiz=quiz).exists():
-            messages.success(request, f"This time you got {score} out of {total_questions}")
-            return redirect('quiz', quiz_id=quiz_id)
-        
-        QuizSubmission.objects.create(user=request.user, quiz=quiz, score=score)
-        messages.success(request, f"Quiz submitted successfully. Your score is {score} out of {total_questions}")
+        messages.success(request, message)
         return redirect('quiz', quiz_id=quiz_id)
     
     context = {"user_profile": user_profile, "quiz": quiz}

@@ -245,8 +245,28 @@
             // Display the result message
             displayResultMessage();
 
-            // Submit the form
-            quizForm.submit();
+            // Remove quizForm.submit(); and replace with an AJAX call
+            var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            var data = new URLSearchParams();
+            data.append('score', userScoreInput.value);
+
+            fetch('', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken,
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-Requested-With': 'XMLHttpRequest' // Ensure the request is identified as AJAX
+                },
+                body: data.toString()
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Score saved:', data);
+                showAjaxMessage(data.message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
     
         // Check right answer and then calculate the score
@@ -279,10 +299,9 @@
                 correctParentDiv.querySelector("label").classList.add("bg-success", "text-white");
 
                 // If user selected a wrong answer, highlight it in red
-                if (selectedInput && selectedInput.value.trim() !== correctAnswer.innerText.trim()) {
+                if (selectedInput && selectedInput.value.trim().toUpperCase() !== correctAnswer.innerText.trim().toUpperCase()) {
                     var wrongParentDiv = selectedInput.closest(".form-check");
-                    wrongParentDiv.querySelector("input").classList.add("bg-danger");
-                    wrongParentDiv.querySelector("label").classList.add("fw-bold");
+                    wrongParentDiv.querySelector("label").classList.add("bg-danger", "text-white");
                 }
             });
 
@@ -298,14 +317,28 @@
 
         // Display result message
         function displayResultMessage() {
-            var score = userScoreInput.value;
-            var totalQuestions = questions.length;
-            var resultMessage = `Your score is ${score} out of ${totalQuestions}`;
-            var messageDiv = document.createElement("div");
-            messageDiv.className = "alert alert-success text-center";
-            messageDiv.innerText = resultMessage;
-            messageDiv.id = "message-div";
-            document.body.insertBefore(messageDiv, document.body.firstChild);
+            // Remove hard-coded text and call showAjaxMessage instead:
+            // var resultMessage = `Your score is ${score} out of ${totalQuestions}`;
+            // var messageDiv = document.createElement("div");
+            // messageDiv.className = "alert alert-success text-center";
+            // messageDiv.innerText = resultMessage;
+            // messageDiv.id = "message-div";
+            // var quizInfo = document.querySelector(".quiz-info");
+            // quizInfo.insertAdjacentElement("afterend", messageDiv);
+        }
+
+        function showAjaxMessage(message) {
+            var quizInfo = document.querySelector(".quiz-info");
+            var existingMessageDiv = document.getElementById("message-div");
+            if (!existingMessageDiv) {
+                var newDiv = document.createElement("div");
+                newDiv.id = "message-div";
+                newDiv.className = "alert alert-success text-center";
+                newDiv.innerText = message;
+                quizInfo.insertAdjacentElement("afterend", newDiv);
+            } else {
+                existingMessageDiv.innerText = message;
+            }
         }
     
         // Attach Event Listener to Submit button
