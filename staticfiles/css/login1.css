@@ -1,0 +1,195 @@
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ensure the body takes full height */
+  /* background: url('./icon/login.svg') no-repeat center center fixed; */ /* Remove background image */
+  background-size: cover; /* Ensure the image scales to the window */
+  padding: 40px; /* Ensure padding on all sides */
+}
+
+@keyframes gradient-animation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  background: linear-gradient(135deg, #EEEEEE, #EEEEEE); /* Slightly darker gradient bluish background */
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  margin: 20px; /* Ensure margin on all sides */
+}
+
+.logo img {
+  width: 250px;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 24px;
+  color: #407bff;
+  margin-bottom: 1.5rem;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 1.5rem; /* Increase margin-bottom to add more space */
+}
+
+.input-group input {
+  width: calc(100% - 20px); /* Reduce width to ensure padding */
+  padding: 10px;
+  border: 1px solid #ccc; /* Change border style */
+  border-radius: 0; /* Remove rounded corners */
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.input-group input::placeholder {
+  color: #aaa; /* Placeholder text color */
+  padding-left: 5px; /* Move placeholder text slightly to the left */
+}
+
+.input-group input:focus {
+  border-color: #407bff;
+}
+
+.input-group label {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  background: #EEEEEE; /* Match the container background */
+  padding: 0 5px; /* Add padding to cover the border */
+  font-size: 14px; /* Reduce initial size */
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 5px; /* Move the text slightly to the left */
+  font-size: 12px;
+  color: #407bff;
+  background: #EEEEEE; /* Match the container background */
+  padding: 0 5px; /* Add padding to cover the border */
+}
+
+.options {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.remember-me input {
+  margin-right: 5px;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  background: #407bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #1e5cce;
+}
+
+.register-link {
+  margin: 1rem 0;
+  font-size: 14px;
+}
+
+.register-link a {
+  color: #407bff;
+  text-decoration: none;
+}
+
+.or-sign-in {
+  font-size: 14px;
+  color: #888;
+  margin: 1rem 0;
+}
+
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.social-buttons button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #000;
+  background: #fff;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.social-buttons button img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.social-buttons button:hover {
+  background: #f0f0f0;
+}
+
+.google {
+  border-color: #db4437;
+}
+
+.facebook {
+  border-color: #4267B2;
+}
+
+.apple {
+  border-color: #000;
+}
+
+.microsoft {
+  border-color: #00a4ef;
+}
+
+.terms {
+  margin-top: 1.5rem;
+  font-size: 12px;
+}
+
+.terms a {
+  color: #888;
+  text-decoration: none;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}
