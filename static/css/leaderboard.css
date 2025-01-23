@@ -1,0 +1,133 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Leaderboard Container */
+.leaderboard-container {
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Title Styling */
+.title {
+  text-align: center;
+  font-size: 2.5rem; /* Increased font size */
+  font-weight: bold; /* Bold text */
+  font-family: 'Ubuntu', sans-serif; /* Ubuntu font */
+  margin-bottom: 20px;
+  color: #0077ff;
+}
+
+/* Leaderboard List */
+.leaderboard {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Individual User Entry */
+.user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.user:hover {
+  transform: scale(1.02);
+  background-color: #e8f4ff;
+}
+
+/* Top 3 Ranks */
+.user.first {
+  background: linear-gradient(45deg, #efe6ad, #ffcc006e); /* Gold Gradient */
+  color: #fff;
+}
+
+.user.second {
+  background: linear-gradient(45deg, #c0c0c0, #d9d9d9); /* Silver Gradient */
+  color: #fff;
+}
+
+.user.third {
+  background: linear-gradient(45deg, #cd803247, #d4944b5e); /* Bronze Gradient */
+  color: #fff;
+}
+
+/* Rank and Profile Section */
+.rank-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rank {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #0077ff;
+  width: 30px;
+  text-align: center;
+}
+
+.profile-pic-container {
+  width: 50px;
+  height: 50px;
+}
+
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #0077ff;
+  object-fit: cover;
+}
+
+/* User Link */
+.user-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* User Details */
+.details {
+  flex-grow: 1;
+  padding-left: 10px;
+}
+
+.username {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.score {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #0077ff;
+  text-align: right;
+}
+
+.total-score {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #0077ff;
+  text-align: right;
+  margin-right: 3%; /* Adjusted margin */
+}
+
+.btn-primary, .btn-outline-success {
+  border-radius: 5px; /* Slightly rounded corners */
+}

@@ -1,0 +1,79 @@
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Screen</title>
+    <link rel="stylesheet" href="{% static 'css/login1.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap">
+    <style>
+        body {
+            background: url('{% static 'images/icon/login.svg' %}') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .text-danger {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="{% static 'images/icon/name.png' %}" alt="Logo">
+        </div>
+        <h1>Welcome</h1>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div>
+                {% for message in messages %}
+                <h5 class="text-danger">{{ message }}</h5>
+                {% endfor %}
+            </div>
+            <div class="input-group">
+                <input type="text" name="username" id="username" placeholder=" " required>
+                <label for="username">Username or Email</label>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" id="password" placeholder=" " required>
+                <label for="password">Password</label>
+            </div>
+            <div class="options">
+                <label class="remember-me">
+                    <input type="checkbox">
+                    Remember me
+                </label>
+            </div>
+            <button type="submit" class="btn">Continue</button>
+        </form>
+        <p class="register-link">
+            Don’t have an account? <a href="{% url 'register' %}">Register</a>
+        </p>
+        <p class="or-sign-in">or</p>
+        <div class="social-buttons">
+            <button class="google">
+                <img src="{% static 'images/icon/google.png' %}" alt="Google Logo">
+                Continue with Google
+            </button>
+            <button class="facebook">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo">
+                Continue with Facebook
+            </button>
+            <button class="apple">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo">
+                Continue with Apple
+            </button>
+            <button class="microsoft">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft Logo">
+                Continue with Microsoft
+            </button>
+        </div>
+        <p class="terms">
+            <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,225 @@
+{% extends "home.html" %}
+
+{% block title %}{{user_profile2.user.username}}'s Profile BrainyBean{% endblock title %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/profile.css">
+    <style>
+        :root {
+            --theme-color: #407BFF;
+            --navbar-font-color: #ffffff;
+        }
+        body, .navbar, .btn, .form-control, .nav-link, .navbar-brand span, h1, p {
+            font-family: 'Ubuntu', sans-serif !important;
+        }
+        .navbar, .btn-primary, .btn-outline-success {
+            background-color: var(--theme-color) !important;
+            border-color: var(--theme-color) !important;
+        }
+        .navbar .nav-link, .navbar-brand {
+            color: var(--navbar-font-color) !important;
+        }
+        .btn-outline-success {
+            color: white !important;
+        }
+        .btn-outline-success:hover {
+            background-color: var(--theme-color) !important;
+            color: white !important;
+        }
+        .form-control, .btn-primary {
+            color: white !important;
+        }
+        .form-control::placeholder {
+            color: white !important;
+        }
+        .form-control {
+            color: black !important;
+        }
+        .navbar-brand span {
+            font-weight: 700;
+        }
+        .profile-header {
+            background-color: var(--theme-color);
+            color: white;
+            padding: 20px 0; /* Further reduced height */
+            text-align: center;
+        }
+        .profile-header img {
+            border-radius: 50%;
+            border: 5px solid white;
+            margin-bottom: 20px;
+        }
+        .profile-header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .profile-header p {
+            font-size: 1.25rem;
+        }
+        .profile-actions {
+            margin-top: 20px; /* Further adjusted margin */
+            text-align: center;
+        }
+        .profile-actions .btn {
+            margin: 0 10px;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+        .profile-info {
+            margin-top: 50px;
+        }
+        .profile-info h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--theme-color);
+        }
+        .profile-info p {
+            font-size: 1.25rem;
+            color: #555;
+        }
+        .profile-info .icon {
+            font-size: 1.5rem;
+            color: var(--theme-color);
+            margin-right: 10px;
+        }
+        .quiz-table {
+            margin-top: 50px;
+        }
+        .quiz-table h3 {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: var(--theme-color);
+            margin-bottom: 20px;
+        }
+        .quiz-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .quiz-table th, .quiz-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .quiz-table th {
+            background-color: var(--theme-color);
+            color: white;
+        }
+        footer {
+            background-color: var(--theme-color);
+            color: white;
+            padding: 40px 0;
+            position: relative;
+            width: 100%;
+            bottom: 0;
+        }
+        footer .nav-link {
+            color: white !important;
+        }
+        footer .nav-link:hover {
+            text-decoration: underline;
+        }
+        footer .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+        }
+        footer .social-icons a:hover {
+            color: #d1d1d1;
+        }
+        footer .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+  </head>
+  <body>
+
+
+    <div class="profile-header">
+        <img src="{{user_profile.profile_img.url}}" alt="User Image"  class"rounded-circle" width="150" height="150">
+        <h1>{{user_profile.user.username}}</h1>
+        <p>{{ user_profile.user.first_name | default:"Full name not available"}}{{user_profile.user.last_name}}</p>
+    </div>
+
+    {% if request.user == user_profile.user %}
+    <div class="profile-actions">
+        <a href="{% url 'edit_profile' %}" type="button" class="btn btn-outline-primary">Edit</a>
+        <a href="{% url 'delete_profile' %}" type="button" class="btn btn-outline-danger">Delete</a>
+    </div>
+    {% endif %}
+
+    <div class="container profile-info mb-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Profile Information</h2>
+                <p><i class="bi bi-gender-ambiguous icon"></i>{{ user_profile.gender|default:"Gender not available" }}</p>
+                <p><i class="bi bi-geo-alt-fill icon"></i>{{ user_profile.location|default:"Location not available" }}</p>
+                <p><i class="bi bi-file-person icon"></i>{{ user_profile.bio|default:"Bio not available" }}</p>
+            </div>
+            <div class="col-md-6">
+                <h2>Performance</h2>
+                <!-- Add performance details here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="container quiz-table mb-5">
+        <h3>Quizzes Attended by {{user_profile.user.username}}</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Quiz</th>
+                    <th scope="col">Marks</th>
+                    <th scope="col">Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for submission in submissions %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td title="{{submission.quiz.title}}">{{submission.quiz.title|truncatewords:4}}</td>
+                    <td>{{submission.score}}/{{submission.quiz.question_set.all|length}}</td>
+                    <td>{{submission.submitted_at | timesince}} ago</td>
+                </tr>
+ 
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+ 
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
+
+{% endblock content %}

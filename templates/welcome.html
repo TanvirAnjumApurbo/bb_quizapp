@@ -1,0 +1,238 @@
+{% extends "home.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container text-center my-5 pt-5">
+  <h1 class="display-5 fw-bold my-2 typewriter gradient-text">Welcome to BrainyBean</h1>
+  <p class="fs-3">
+    Challenge Your Brain, Compete with Friends, and Keep Learning
+  </p>
+  <div class="d-inline-flex flex-column flex-md-row gap-2 mb-5 pb-5">
+    <a href="{% url 'all-quiz' %}" class="btn btn-primary btn-lg px-4 rounded-3">Take a Quiz</a>
+      {% if not request.user.is_authenticated %}
+      <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-lg px-4" type="button">
+          Sign Up
+      </a>
+      {% endif %}
+  </div>
+</div>
+
+<!-- New Sections -->
+<div class="container my-5">
+  <div class="row align-items-center mb-5 fade-in">
+    <div class="col-md-6">
+      <img src="{% static 'images/icon/knowledge.png' %}" class="img-fluid rounded hover-effect" alt="Features Image">
+    </div>
+    <div class="col-md-6 text-center text-md-start">
+      <h2 class="fw-bold">Learn and Grow with BrainyBean</h2>
+      <p class="fs-5">Discover quizzes across diverse topics, track your progress, and compete with friends to climb the leaderboard. Make learning fun and interactive!</p>
+    </div>
+  </div>
+
+  <div class="row align-items-center flex-md-row-reverse mb-5 fade-in">
+    <div class="col-md-6">
+      <img src="{% static 'images/icon/quiz1.png' %}" class="img-fluid rounded hover-effect" alt="Custom Quiz Image">
+    </div>
+    <div class="col-md-6 text-center text-md-start">
+      <h2 class="fw-bold">Create Custom Quizzes</h2>
+      <p class="fs-5">Design quizzes tailored to your needs. Share them with friends or colleagues and test their knowledge.</p>
+    </div>
+  </div>
+
+  <div class="row align-items-center mb-5 fade-in">
+    <div class="col-md-6">
+      <img src="{% static 'images/icon/community.png' %}" class="img-fluid rounded hover-effect" alt="Community Image">
+    </div>
+    <div class="col-md-6 text-center text-md-start">
+      <h2 class="fw-bold">Engage with the Community</h2>
+      <p class="fs-5">Join a community of learners. Exchange ideas, share quizzes, and learn collaboratively. Together, we grow stronger!</p>
+    </div>
+  </div>
+
+  <div class="row align-items-center flex-md-row-reverse mb-5 fade-in">
+    <div class="col-md-6">
+      <img src="{% static 'images/icon/podium.png' %}" class="img-fluid rounded hover-effect" alt="Leaderboard Image">
+    </div>
+    <div class="col-md-6 text-center text-md-start">
+      <h2 class="fw-bold">Climb the Leaderboard</h2>
+      <p class="fs-5">Test your skills against others and aim for the top. Celebrate your achievements with every milestone you reach!</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    background-color:rgba(250, 172, 168, 0.55);
+background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
+
+
+    backdrop-filter: blur(100px);
+
+     /* Light gradient background */
+  }
+
+
+
+
+  .typewriter {
+    overflow: hidden;
+    border-right: .15em solidrgb(0, 123, 255); /* Cursor color */
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: normal;
+    animation: typing 2.5s steps(40, end), blink-caret 1.5s step-end forwards;
+  }
+  
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  @keyframes blink-caret {
+    0%, 50% { border-color: #007bff; }
+    100% { border-color: transparent; }
+  }
+
+  .gradient-text {
+    background: linear-gradient(to right, #007bff, #00c6ff, #007bff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 3s linear infinite;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .profile-pic-container img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #007bff;
+  }
+  .leaderboard .col-lg-4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px; /* Increased margin */
+    transition: transform 0.3s ease-in-out;
+  }
+  .leaderboard .col-lg-4:not(:last-child) {
+    margin-bottom: 30px; /* Ensure space between boxes */
+  }
+  .leaderboard .col-lg-4:hover {
+    transform: scale(1.05);
+  }
+  .leaderboard .col-lg-4:nth-child(1) {
+    background: linear-gradient(45deg, #efe6ad,rgba(255, 204, 0, 0.54)); /* Gold Gradient */
+    color: #fff;
+  }
+  .leaderboard .col-lg-4:nth-child(2) {
+    background: linear-gradient(45deg,rgba(192, 192, 192, 0.69), #d9d9d9); /* Silver Gradient */
+    color: #fff;
+  }
+  .leaderboard .col-lg-4:nth-child(3) {
+    background: linear-gradient(45deg, #cd803247,rgba(212, 148, 75, 0.52)); /* Bronze Gradient */
+    color: #fff;
+  }
+  .leaderboard .btn-secondary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  /* Smooth scrolling effect */
+  .hover-effect {
+    transition: transform 0.3s ease-in-out;
+  }
+  .hover-effect:hover {
+    transform: scale(1.05);
+  }
+
+  h2 {
+    color: #007bff;
+  }
+
+  p {
+    color: #555;
+  }
+
+  /* Fade-in effect */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .d-inline-flex {
+      flex-direction: column;
+    }
+
+    .col-md-6 {
+      text-align: center;
+    }
+
+    .col-md-6 img {
+      margin-bottom: 20px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(section => {
+      observer.observe(section);
+    });
+  });
+</script>
+
+<div class="container leaderboard">
+  <h1 class="display-4 text-center my-5">Leaderboard</h1>
+  <div class="row text-center">
+    {% for rank in leaderboard_users|slice:":3" %}
+    <div class="col-lg-4 col-md-6 col-sm-12 position-relative mb-4 user {% if forloop.first %}first{% elif forloop.second %}second{% elif forloop.third %}third{% endif %}">
+      <div class="profile-pic-container">
+        <img
+          src="{{ rank.user.profile.profile_img.url|default:'https://via.placeholder.com/160' }}"
+          class="img-fluid rounded-circle"
+          alt="user image"
+        />
+      </div>
+      <h2 class="fw-normal">{{ rank.user.username }}</h2>
+      <p>{{ rank.user.profile.bio|truncatechars:50 }}</p>
+      <p><a class="btn btn-secondary" href="{% url 'profile' rank.user.username %}">View Profile »</a></p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

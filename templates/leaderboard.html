@@ -1,0 +1,33 @@
+{% extends "home.html" %}
+{% load static %}
+
+{% block content %}
+<head>
+  <link rel="stylesheet" href="{% static 'css/leaderboard.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet"> <!-- Load Ubuntu font -->
+</head>
+<div class="leaderboard-container">
+  <h1 class="title">Quiz Leaderboard</h1>
+  <div class="leaderboard">
+    {% for rank in leaderboard_users %}
+    <a href="{% url 'profile' rank.user.username %}" class="user-link">
+      <div class="user {% if forloop.counter == 1 %}first{% elif forloop.counter == 2 %}second{% elif forloop.counter == 3 %}third{% endif %}">
+        <div class="rank-profile">
+          <div class="rank">{{ forloop.counter }}</div>
+          <div class="profile-pic-container">
+            <img 
+              src="{{ rank.user.profile.profile_img.url|default:'https://via.placeholder.com/50' }}" 
+              class="profile-pic" 
+              alt="user image">
+          </div>
+        </div>
+        <div class="details">
+          <div class="username">{{ rank.user.username }}</div>
+        </div>
+        <div class="total-score">{{ rank.total_score }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
